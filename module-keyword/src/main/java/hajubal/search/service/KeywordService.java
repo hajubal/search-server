@@ -34,6 +34,8 @@ public class KeywordService {
     @Cacheable(value = "keyword")
     @Transactional(readOnly = true)
     public List<PopularKeywordResult> popularKeywords() {
+        log.info("popularKeywords call. none cached.");
+
         List<Keyword> keywords = keywordRepository.findTop10ByOrderByCountDesc();
 
         return keywords.stream().map(keyword -> PopularKeywordResult.of(keyword.getKeyword(), keyword.getCount())).collect(Collectors.toList());

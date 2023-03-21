@@ -28,11 +28,11 @@ class KeywordApiTest {
     private KeywordService keywordService;
 
     @Nested
-    @DisplayName("searchedKeyword 함수는")
+    @DisplayName("searchedKeyword 함수는 ")
     class Describe_of_searchedKeyword {
 
         @Nested
-        @DisplayName("데이터를 검색하면")
+        @DisplayName("데이터를 검색하면 ")
         class Describe_of_search {
             @BeforeEach
             void beforeEach() {
@@ -48,11 +48,11 @@ class KeywordApiTest {
     }
 
     @Nested
-    @DisplayName("popular 함수는")
+    @DisplayName("popular 함수는 ")
     class Describe_of_popular {
 
         @Nested
-        @DisplayName("검색 데이터가 있으면")
+        @DisplayName("검색 데이터가 있으면 ")
         class Describe_of_data_exist {
             @BeforeEach
             void beforeEach() {
@@ -74,7 +74,7 @@ class KeywordApiTest {
         }
 
         @Nested
-        @DisplayName("검색 데이터가 없으면")
+        @DisplayName("검색 데이터가 없으면 ")
         class Describe_of_data_not_exist {
             @BeforeEach
             void beforeEach() {
@@ -89,4 +89,5 @@ class KeywordApiTest {
             }
         }
     }
+
 }

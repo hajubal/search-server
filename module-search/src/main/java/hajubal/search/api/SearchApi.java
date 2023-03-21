@@ -2,6 +2,7 @@ package hajubal.search.api;
 
 import hajubal.search.client.SearchClient;
 import hajubal.search.client.SearchResponse;
+import hajubal.search.exception.SearchApiCallException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class SearchApi {
             }
         }
 
-        throw new RestClientException("API 응답에 실패.");
+        throw new SearchApiCallException("API 응답에 실패.");
     }
 
 }

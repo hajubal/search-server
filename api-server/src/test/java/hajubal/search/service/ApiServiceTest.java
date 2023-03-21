@@ -19,7 +19,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 class ApiServiceTest {
@@ -66,7 +65,7 @@ class ApiServiceTest {
 
             @DisplayName("검색 결과를 리턴한다.")
             @Test
-            void test() {
+            void searched_return() {
                 apiService.searchBlog(request);
             }
         }
@@ -84,15 +83,15 @@ class ApiServiceTest {
             void setup() {
                 given(keywordApi.popularKeywords())
                         .willReturn(
-                                List.of(PopularKeywordResult.of("한국", 100000L),
-                                        PopularKeywordResult.of("미국", 1000L),
-                                                PopularKeywordResult.of("러시아", 100L))
+                                List.of(PopularKeywordResult.of("한국", 100000L)
+                                        , PopularKeywordResult.of("미국", 1000L)
+                                        , PopularKeywordResult.of("러시아", 100L))
                         );
             }
 
             @DisplayName("결과를 리턴한다.")
             @Test
-            void test() {
+            void searched_return() {
                 assertThat(apiService.popular().getPopularKeywords()).size().isEqualTo(3);
             }
         }
