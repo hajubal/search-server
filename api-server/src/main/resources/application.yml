@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: classpath:/application-keyword.yml, classpath:/application-search.yml
+
+
+logging:
+  level:
+    root: info
+    hajubal: debug
+    org.springframework: info

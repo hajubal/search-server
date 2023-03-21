@@ -1,0 +1,4 @@
+rootProject.name = 'search-server'
+include 'module-search'
+include 'module-keyword'
+include 'api-server'

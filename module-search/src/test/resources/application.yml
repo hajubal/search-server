@@ -1,0 +1,10 @@
+app:
+  api:
+    kakao:
+      url: https://dapi.kakao.com
+      authorization: test
+      rest-api-key: test
+    naver:
+      url: https://openapi.naver.com
+      client-id: test
+      client-secret: test
