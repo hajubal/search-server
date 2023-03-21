@@ -2,7 +2,7 @@ package hajubal.search.service;
 
 import hajubal.search.api.KeywordApi;
 import hajubal.search.api.SearchApi;
-import hajubal.search.client.dto.SearchResponse;
+import hajubal.search.client.SearchResponse;
 import hajubal.search.controller.dto.SearchBlogDto;
 import hajubal.search.result.PopularKeywordResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest

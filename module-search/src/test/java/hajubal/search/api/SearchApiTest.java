@@ -1,16 +1,20 @@
 package hajubal.search.api;
 
-import hajubal.search.client.KakaoSearchClient;
-import hajubal.search.client.NaverSearchClient;
+import feign.RetryableException;
 import hajubal.search.client.SearchClient;
-import hajubal.search.client.dto.SearchResponse;
-import org.junit.jupiter.api.*;
+import hajubal.search.client.SearchResponse;
+import hajubal.search.client.kakao.KakaoSearchClient;
+import hajubal.search.client.naver.NaverSearchClient;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.client.RestClientException;
 
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +91,7 @@ class SearchApiTest {
             @BeforeEach
             void setup() {
                 given(kakaoSearchClient.search("korea", null, 1, 10))
-                        .willThrow(RestClientException.class);
+                        .willThrow(RetryableException.class);
 
                 given(naverSearchClient.search("korea", null, 1, 10))
                         .willReturn(response);

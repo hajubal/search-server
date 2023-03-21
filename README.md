@@ -14,8 +14,8 @@
 - 동시성 이슈 대응
   - JPQL update query 적용
 - 외부 라이브러리
-  - org.apache.httpcomponents:httpclient: 외부 API 호출
-  - org.springframework.boot:spring-boot-starter-cache: 대용량 데이터 검색 Cash 적용
+  - org.springframework.cloud:spring-cloud-starter-openfeign: 외부 API 호출
+  - org.springframework.boot:spring-boot-starter-cache: 대용량 데이터 검색 Cache 적용
 
 # API 명세
 
@@ -47,13 +47,14 @@
 
 #### Document
 
-| Name      | Type | Description                                         |
-|-----------|------|-----------------------------------------------------|
-| title     | String | 블로그 글 제목                                            |
-| contents  | String | 블로그 글 요약                                            |
-| url       | String | 블로그 글 URL                                           |
-| blogname  | String | 블로그의 이름                                             |
-| datetime  | Date | 블로그 글 작성시간, ISO 8601<br/>- ex: 2022-08-29 |
+| Name       | Type   | Description                                           |
+|------------|--------|-------------------------------------------------------|
+| title      | String | 블로그 글 제목                                              |
+| contents   | String | 블로그 글 요약                                              |
+| url        | String | 블로그 글 URL                                             |
+| blogname   | String | 블로그의 이름                                               |
+| thumbnail  | String | 검색 시스템에서 추출한 대표 미리보기 이미지 URL, <br/>미리보기 크기 및 화질은 변경될 수 있음  |
+| datetime   | Date   | 블로그 글 작성시간, ISO 8601<br/>- ex: 2022-08-29             |
 
 ### Sample
 
@@ -77,8 +78,9 @@ curl --location --request GET 'http://localhost:8080/v1/search/blog?query=korea&
     {
       "title": "한국 막걸리 Makgeolli of <b>Korea</b>",
       "contents": "2023.3.2 한국 막걸리 Makgeolli of <b>Korea</b> Makgeolli = Raw [unrefined] rice wine 이마트 한쪽 벽면을 꽉 채우고 있는 막걸리코너 막걸리의 인기를 짐작할 수 있다. 내가 어렸을 땐, 마트에 이렇게 많은 종류가 있었던 것 같지 않은데... 오래간만에 마트구경하다 유심히 봤는데 너무 재밌어서^^ 막걸리의 종류와...",
-      "url": "http://petitechef.tistory.com/860",
+      "url": "https://petitechef.tistory.com/860",
       "blogname": "Cafezinho 카페징유",
+      "thumbnail": "https://petitechef.tistory.com/main.png",
       "datetime": "2023-03-02"
     },
       ...
@@ -145,5 +147,5 @@ curl --location --request GET 'http://localhost:8080/v1/keywords/popular'
 
 ``` shell
 > ./gradlew clean :api-server:buildNeeded --stacktrace --info --refresh-dependencies -x test
-> java -jar module-boot-api/build/libs/api-server-0.0.1-SNAPSHOT.jar
+> java -jar api-server/build/libs/api-server-0.0.1.jar
 ```

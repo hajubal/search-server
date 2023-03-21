@@ -1,4 +1,4 @@
-package hajubal.search.client.dto;
+package hajubal.search.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -51,7 +51,6 @@ public class SearchResponse {
         /** 블로그의 이름 */
         private String blogname;
 
-        @JsonIgnore
         /** 검색 시스템에서 추출한 대표 미리보기 이미지 URL, 미리보기 크기 및 화질은 변경될 수 있음 */
         private String thumbnail;
 

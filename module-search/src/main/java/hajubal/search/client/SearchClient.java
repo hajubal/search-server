@@ -1,8 +1,6 @@
 package hajubal.search.client;
 
 
-import hajubal.search.client.dto.SearchResponse;
-
 /**
  * 블로그 검색 인터페이스
  */

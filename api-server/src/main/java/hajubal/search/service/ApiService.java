@@ -2,7 +2,7 @@ package hajubal.search.service;
 
 import hajubal.search.api.KeywordApi;
 import hajubal.search.api.SearchApi;
-import hajubal.search.client.dto.SearchResponse;
+import hajubal.search.client.SearchResponse;
 import hajubal.search.controller.dto.PopularKeywordDto;
 import hajubal.search.controller.dto.SearchBlogDto;
 import hajubal.search.result.PopularKeywordResult;

@@ -1,7 +1,7 @@
 package hajubal.search.api;
 
 import hajubal.search.client.SearchClient;
-import hajubal.search.client.dto.SearchResponse;
+import hajubal.search.client.SearchResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

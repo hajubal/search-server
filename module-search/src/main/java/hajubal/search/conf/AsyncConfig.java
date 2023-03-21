@@ -1,6 +1,5 @@
 package hajubal.search.conf;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 @Slf4j
-@RequiredArgsConstructor
 @EnableAsync
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {

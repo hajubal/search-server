@@ -1,4 +1,4 @@
-package hajubal.search.client.dto;
+package hajubal.search.client.naver.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

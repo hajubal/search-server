@@ -1,4 +1,4 @@
-package hajubal.search.client.dto;
+package hajubal.search.client.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

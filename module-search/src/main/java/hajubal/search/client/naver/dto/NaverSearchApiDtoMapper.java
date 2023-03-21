@@ -1,5 +1,6 @@
-package hajubal.search.client.dto;
+package hajubal.search.client.naver.dto;
 
+import hajubal.search.client.SearchResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

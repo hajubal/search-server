@@ -1,6 +1,6 @@
 package hajubal.search.controller.dto;
 
-import hajubal.search.client.dto.SearchResponse;
+import hajubal.search.client.SearchResponse;
 import lombok.*;
 
 import javax.validation.constraints.Max;
