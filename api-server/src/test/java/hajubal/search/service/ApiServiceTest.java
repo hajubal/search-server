@@ -3,6 +3,7 @@ package hajubal.search.service;
 import hajubal.search.api.KeywordApi;
 import hajubal.search.api.SearchApi;
 import hajubal.search.client.SearchResponse;
+import hajubal.search.controller.dto.PopularKeywordDto;
 import hajubal.search.controller.dto.SearchBlogDto;
 import hajubal.search.event.SearchEventHandler;
 import hajubal.search.result.PopularKeywordResult;
@@ -21,8 +22,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ApiServiceTest {
@@ -47,23 +47,7 @@ class ApiServiceTest {
         @Nested
         @DisplayName("키워드 검색 요청을 받으면")
         class Describe_of_SearchBlogDto_RequestDto {
-
-            @BeforeEach
-            void setup() {
-                given(searchApi.search(any(), any(), any(), any()))
-                        .willReturn(
-                                SearchResponse.of(
-                                        SearchResponse.Meta.of(10, 10, true),
-                                        List.of(
-                                                SearchResponse.Document.of("카카오 제목", "콘텐츠"
-                                                        , "url", "블로그명", "썸네일 링크"
-                                                        , LocalDate.now())
-                                        )
-                                )
-                        );
-            }
-
-            final SearchBlogDto.RequestDto request =
+            private final SearchBlogDto.RequestDto request =
                     SearchBlogDto.RequestDto.builder()
                             .query("korea")
                             .page(1)
@@ -71,10 +55,30 @@ class ApiServiceTest {
                             .sort(SearchBlogDto.RequestDto.Sort.recency)
                             .build();
 
+            private final SearchResponse response = SearchResponse.of(
+                        SearchResponse.Meta.of(10, 10, true),
+                        List.of(
+                                SearchResponse.Document.of("카카오 제목", "콘텐츠"
+                                        , "url", "블로그명", "썸네일 링크"
+                                        , LocalDate.now())
+                        )
+                );
+
+            private SearchBlogDto.ResponseDto responseDto;
+
+            @BeforeEach
+            void setup() {
+                given(searchApi.search(any(), any(), any(), any()))
+                        .willReturn(response);
+
+                responseDto = apiService.searchBlog(request);
+            }
+
             @DisplayName("검색 결과를 리턴한다.")
             @Test
             void searched_return() {
-                apiService.searchBlog(request);
+                assertThat(responseDto)
+                        .isEqualTo(SearchBlogDto.ResponseDto.from(response, request.getSort()));
             }
 
             @DisplayName("검색 이벤트 핸들러를 호출한다.")
@@ -93,6 +97,8 @@ class ApiServiceTest {
         @DisplayName("호출하면")
         class Describe_of_call {
 
+            private List<PopularKeywordDto.ResponseDto.PopularKeyword> popularKeywords;
+
             @BeforeEach
             void setup() {
                 given(keywordApi.popularKeywords())
@@ -101,12 +107,14 @@ class ApiServiceTest {
                                         , PopularKeywordResult.of("미국", 1000L)
                                         , PopularKeywordResult.of("러시아", 100L))
                         );
+
+                popularKeywords = apiService.popular().getPopularKeywords();
             }
 
             @DisplayName("결과를 리턴한다.")
             @Test
             void searched_return() {
-                assertThat(apiService.popular().getPopularKeywords()).size().isEqualTo(3);
+                assertThat(popularKeywords).size().isEqualTo(3);
             }
         }
     }

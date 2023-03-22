@@ -3,6 +3,7 @@ package hajubal.search.controller;
 import hajubal.search.controller.dto.PopularKeywordDto;
 import hajubal.search.controller.dto.SearchBlogDto;
 import hajubal.search.service.ApiService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,12 +44,15 @@ public class ApiControllerTest {
             @DisplayName("블로그 검색 요청을 받으면")
             class Context_with_SearchBlogRequest {
 
+                @BeforeEach
+                void setup() {
+                    given(apiService.searchBlog(any()))
+                            .willReturn(getSearchBlogResponse());
+                }
+
                 @Test
                 @DisplayName("검색 결과를 페이징처리하여 반환한다.")
                 void it_returns_paging() throws Exception {
-
-                    given(apiService.searchBlog(any()))
-                            .willReturn(getSearchBlogResponse());
 
                     mockMvc.perform(get("/v1/search/blog")
                                     .contentType(MediaType.APPLICATION_JSON)
@@ -57,7 +61,9 @@ public class ApiControllerTest {
                                     .param("sort", "recency")
                                     .param("page", "1")
                                     .param("size", "10"))
-                            .andDo(print()).andExpect(status().isOk());
+                            .andDo(print()).andExpect(status().isOk())
+                            .andExpect(jsonPath("$.meta.totalCount").value(TOTAL_COUNT))
+                    ;
                 }
             }
 
@@ -82,12 +88,15 @@ public class ApiControllerTest {
             @DisplayName("인기 검색 요청을 받으면")
             class Context_with_PopularKeywordRequest {
 
+                @BeforeEach
+                void setup() {
+                    given(apiService.popular())
+                            .willReturn(getPopularKeywordResponse());
+                }
+
                 @Test
                 @DisplayName("인기 검색어 상위10개를 결과를 반환한다.")
                 void it_returns() throws Exception {
-
-                    given(apiService.popular())
-                            .willReturn(getPopularKeywordResponse());
 
                     mockMvc.perform(get("/v1/keywords/popular")
                                     .contentType(MediaType.APPLICATION_JSON)
@@ -99,9 +108,11 @@ public class ApiControllerTest {
         }
     }
 
+    private final Integer TOTAL_COUNT = 1000;
+
     private SearchBlogDto.ResponseDto getSearchBlogResponse() {
         return SearchBlogDto.ResponseDto.of(
-                SearchBlogDto.ResponseDto.Meta.of(100, 1000, false, SearchBlogDto.RequestDto.Sort.accuracy.name()),
+                SearchBlogDto.ResponseDto.Meta.of(TOTAL_COUNT, 100, false, SearchBlogDto.RequestDto.Sort.accuracy.name()),
                 List.of(
                         SearchBlogDto.ResponseDto.Document.of(
                                 "제목"

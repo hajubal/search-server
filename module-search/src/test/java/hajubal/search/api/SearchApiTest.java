@@ -18,9 +18,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 class SearchApiTest {
@@ -78,8 +80,10 @@ class SearchApiTest {
             @DisplayName("검색 결과를 리턴한다.")
             @Test
             void test() {
-                when(client.search("korea", null, 1, 10))
-                        .thenReturn(response);
+//                when(client.search("korea", null, 1, 10))
+//                        .thenReturn(response);
+
+                assertThat(client.search("korea", null, 1, 10)).isEqualTo(response);
             }
         }
 
@@ -94,13 +98,13 @@ class SearchApiTest {
 
                 given(naverSearchClient.search("korea", null, 1, 10))
                         .willReturn(response);
+
+                client.search("korea", null, 1, 10);
             }
 
             @DisplayName("NaverSearchClient를 호출한다.")
             @Test
             void test2() {
-                client.search("korea", null, 1, 10);
-
                 verify(kakaoSearchClient, times(1)).search(any(), any(), any(), any());
                 verify(naverSearchClient, times(1)).search(any(), any(), any(), any());
             }

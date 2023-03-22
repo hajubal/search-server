@@ -56,6 +56,7 @@ public class SearchBlogDto {
         }
     }
 
+    @EqualsAndHashCode
     @ToString
     @Getter
     @AllArgsConstructor(staticName = "of")
@@ -67,6 +68,7 @@ public class SearchBlogDto {
         /** 문서 정보 */
         private List<Document> documents;
 
+        @EqualsAndHashCode
         @ToString
         @Getter
         @AllArgsConstructor(staticName = "of")
@@ -85,6 +87,7 @@ public class SearchBlogDto {
             private String sorted;
         }
 
+        @EqualsAndHashCode
         @ToString
         @Getter
         @AllArgsConstructor(staticName = "of")
