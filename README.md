@@ -1,3 +1,6 @@
+# 다운로드 링크
+[api-server-0.0.1.jar (다운로드)](https://github.com/hajubal/search-server/raw/main/api-server-0.0.1.jar).
+
 # 프로젝트 설명
 
 - JAVA 11, Spring Boot, Gradle, H2
