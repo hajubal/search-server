@@ -1,7 +1,7 @@
 app:
   api:
     kakao:
-      url: https://dapi.kakao.com1
+      url: https://dapi.kakao.com
       authorization: KakaoAK
       rest-api-key: 8fbbf58f05ff3904ace5c9e1dabdf09d
     naver:
