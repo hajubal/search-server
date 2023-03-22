@@ -40,12 +40,12 @@ class ApiServiceTest {
     private SearchEventHandler handler;
 
     @Nested
-    @DisplayName("searchBlog 함수는")
+    @DisplayName("searchBlog 함수는 ")
     @RecordApplicationEvents
     class Describe_of_searchBlog {
 
         @Nested
-        @DisplayName("키워드 검색 요청을 받으면")
+        @DisplayName("키워드 검색 요청을 받으면 ")
         class Describe_of_SearchBlogDto_RequestDto {
             private final SearchBlogDto.RequestDto request =
                     SearchBlogDto.RequestDto.builder()
@@ -90,11 +90,11 @@ class ApiServiceTest {
     }
 
     @Nested
-    @DisplayName("popular 함수는")
+    @DisplayName("popular 함수는 ")
     class Describe_of_popular {
 
         @Nested
-        @DisplayName("호출하면")
+        @DisplayName("호출하면 ")
         class Describe_of_call {
 
             private List<PopularKeywordDto.ResponseDto.PopularKeyword> popularKeywords;

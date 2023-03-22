@@ -44,7 +44,7 @@ public class KeywordService {
     /**
      * 키워드 검색 횟수 update
      * cached 데이터 초기화.
-     *
+     * //-- cache에 key 값이 없어 'allEntries = true'로 전체 초기화 --//
      * @param keyword 검색 키워드
      */
     @CacheEvict(value = "keyword", allEntries = true, condition = "#keyword != null")

@@ -26,7 +26,7 @@ public class NaverSearchApiDto {
 		/** total_count 중 노출 가능 문서 수 */
 		private Integer display;
 
-		/** */
+		/** 블로그 목록 */
 		private List<Items> items;
 
 		public Boolean isEnd(final Integer start) {
