@@ -6,7 +6,6 @@ import hajubal.search.exception.SearchApiCallException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 
@@ -30,7 +29,9 @@ public class SearchApi {
      * @return 검색 결과
      */
     public SearchResponse search(String query, String sort, Integer page, Integer size) {
-        for (SearchClient client :  searchClient) {
+        log.debug("SearchClient implements count: {}", searchClient.size());
+
+        for (SearchClient client : searchClient) {
             try {
                 return client.search(query, sort, page, size);
             } catch (Exception e) {

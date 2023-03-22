@@ -4,14 +4,16 @@ import hajubal.search.api.KeywordApi;
 import hajubal.search.api.SearchApi;
 import hajubal.search.client.SearchResponse;
 import hajubal.search.controller.dto.SearchBlogDto;
+import hajubal.search.event.SearchEventHandler;
 import hajubal.search.result.PopularKeywordResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.event.RecordApplicationEvents;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,21 +21,27 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 class ApiServiceTest {
 
-    @InjectMocks
+    @Autowired
     private ApiService apiService;
 
-    @Mock
+    @MockBean
     private SearchApi searchApi;
 
-    @Mock
+    @MockBean
     private KeywordApi keywordApi;
+
+    @MockBean
+    private SearchEventHandler handler;
 
     @Nested
     @DisplayName("searchBlog 함수는")
+    @RecordApplicationEvents
     class Describe_of_searchBlog {
 
         @Nested
@@ -67,6 +75,12 @@ class ApiServiceTest {
             @Test
             void searched_return() {
                 apiService.searchBlog(request);
+            }
+
+            @DisplayName("검색 이벤트 핸들러를 호출한다.")
+            @Test
+            void handler_call() {
+                verify(handler, times(1)).searchedKeyword(any());
             }
         }
     }
