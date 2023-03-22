@@ -16,4 +16,8 @@ public class ErrorResponse {
 		return new ErrorResponse(responseCode.getCode(), responseCode.getMessage());
 	}
 
+	public static ErrorResponse of(final ResponseCode responseCode, final String message) {
+		return new ErrorResponse(responseCode.getCode(), message);
+	}
+
 }
