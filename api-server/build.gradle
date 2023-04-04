@@ -9,4 +9,4 @@ dependencies {
     implementation project(':module-keyword')
 }
 
-tasks.register('prepareKotlinBuildScriptModel') {}
+jar.enabled = false

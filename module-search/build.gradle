@@ -10,6 +10,3 @@ tasks.bootJar {
 tasks.jar {
     enabled = true
 }
-
-tasks.register('prepareKotlinBuildScriptModel') {}
-
