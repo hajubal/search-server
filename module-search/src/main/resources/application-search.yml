@@ -3,8 +3,8 @@ app:
     kakao:
       url: https://dapi.kakao.com
       authorization: KakaoAK
-      rest-api-key: 8fbbf58f05ff3904ace5c9e1dabdf09d
+      rest-api-key: 8fbbf58f05ff3904ace5c9e1dabdf09d(not_valid)
     naver:
       url: https://openapi.naver.com
       client-id: BLBW7saQZK8ibvyJzPFH
-      client-secret: gCM7qd_kfM
+      client-secret: gCM7qd_kfM(not_valid)
